@@ -1,0 +1,47 @@
+#lang racket
+;bit-count
+
+(define(even-bits n)
+  (cond((= n 0)1)
+       ((=(remainder n 2)0)
+          (even-bits (quotient n 2)))
+       (else (odd-bits(quotient n 2)))
+  )
+)
+(define(odd-bits n)
+  (cond((= n 0)0)
+       ((=(remainder n 2)0)
+          (odd-bits (quotient n 2)))
+       (else(even-bits(quotient n 2)))
+   )
+)
+(define(bit-count n)
+  (cond ((= n 0)0)
+           (else (+(remainder n 2)(bit-count (quotient n 2))))
+  )
+)
+(define(report-results n)
+  (display "Happy birthday to you!\n\t")
+  (display n)(newline)
+  (display "\teven?\t") 
+
+  (cond((=(even-bits n)1) (let()(display "Yes")1))(else(display "No") 0))
+  (newline)
+  (display "\todd?\t")
+  (cond((=(odd-bits n)1) (let()(display "Yes")1))(else(display "No") 0))
+
+  (newline)
+  (display "bit-count = ")
+  (bit-count n)
+)
+;***** Date of YOUR birthday *******
+(define dd 18)
+(define mm 09)
+(define yyyy 1999)
+;***********************************
+(report-results (+ (* dd 1000000)
+                   (* mm 10000)
+                   yyyy))
+
+
+ 

@@ -1,0 +1,40 @@
+#lang racket
+;golden-section20
+(define a 3)(define b 5);3.47372 (define (fun x)
+(set! x (- x (/ 27 28)))
+(- (+ x (sin(- (* 2 x) (* 0.25 pi))) (log (+ x 1))) 0.5) )
+(define (golden-section-search a b) (let(
+(xmin(if(< a b)(golden-start a b)(golden-start b a ))) )
+(newline)
+xmin )
+) ; z+ sin(2z- 0.25 pi) + ln( z+1) - 0.5 (define (golden-start a b)
+(let(
+(xa (+ a (* mphi(- b a)))) (xb (- b (* mphi(- b a))))
+)
+(try a b xa (fun xa) xb (fun xb)) ;вычисляется значение функции в точках а б. ха и б локальные переменные
+) )
+(define mphi (* 0.5(- 3(sqrt 5)))); глобальная перем (define (try a b xa ya xb yb);опр процедура трай
+(if(close-enough? a b);если а и б достаточно близки друг к другу
+(* (+ a b)0.5)
+(let() (display "+");если не достаточно близки
+(cond((< ya yb)(set! b xb) (set! xb xa)
+(set! yb ya)
+(set! xa (+ a (* mphi(- b a)))) (try a b xa (fun xa) xb yb)
+)
+(else (set! a xa)
+(set! xa xb)
+(set! ya yb)
+(set! xb (- b (* mphi(- b a)))) (try a b xa ya xb (fun xb))
+) );cond...
+);let... );if...
+)
+(define (close-enough? x y)
+(<(abs (- x y))tolerance))
+(define tolerance 0.00001)
+(define xmin 0)
+(set! xmin(golden-section-search a b))
+(display"interval=\t[") (display a)
+(display" , ")
+(display b) (display"]\n") (display"xmin=\t\t")
+xmin (display"f(xmin)=\t")
+(fun xmin)
