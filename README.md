@@ -1,2 +1,2 @@
 # SP
-3 semester, System programming
+4 semester, System programming
